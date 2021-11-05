@@ -13,6 +13,9 @@ base namespace (**w**) is ` {http://schemas.openxmlformats.org/wordprocessingml/
 | **tr**  | row |
 | **tc**  |  cell |
 |  **sectPr**  | section |
+|  **br**  | break |
+|  **headerReference**  | reference to a header using rId |
+|  **footerReference**  | reference to a footer using rId |
 
 ## Python 3 libs to use
 - zipFile (internal lib)
