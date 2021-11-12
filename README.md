@@ -44,8 +44,8 @@ base namespace (**w**) is ` {http://schemas.openxmlformats.org/wordprocessingml/
 | **tc**  |  cell |
 |  **sectPr**  | section |
 |  **br**  | break |
-|  **headerReference**  | reference to a header using rId |
-|  **footerReference**  | reference to a footer using rId |
+|  **headerReference**  | reference to a header using **rId**, the parameter **type** can contain either 'default' for using it as default header or 'first' to use it on the first page |
+|  **footerReference**  | reference to a footer using **rId**, the parameter **type** can contain either 'default' for using it as default footer or 'first' to use it on the first page |
 |  **lang**  | language of text (example : en-GB) |
 
 ## Python 3 libs to use
