@@ -48,6 +48,13 @@ base namespace (**w**) is ` {http://schemas.openxmlformats.org/wordprocessingml/
 |  **footerReference**  | reference to a footer using **rId**, the parameter **type** can contain either 'default' for using it as default footer or 'first' to use it on the first page |
 |  **lang**  | language of text (example : en-GB) |
 
+
+## XPath Expressions
+
+Get all sections : ```//w:sectPr/...```
+
+Get all page breaks : ```.//w:br[@w:type="page"]```
+
 ## Python 3 libs to use
 - zipFile (internal lib)
 - lxml (internal lib etree is renaming the namespaces)
