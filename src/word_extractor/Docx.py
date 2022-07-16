@@ -25,6 +25,12 @@ NS = {
 class Docx:
 
     def __init__(self,filename):
+        """Docx Object
+
+        Args:
+            filename (string): Filename of the Word Document to open
+
+        """        
 
         self.filename = filename
         self.created_datetime = None
@@ -35,6 +41,7 @@ class Docx:
             zip_ref.extractall("tmp")
 
     def zip(self):
+
         with zipfile.ZipFile(self.filename, 'w') as zipObj:
             for foldername, subfolders, filenames in os.walk("tmp"):
                 for filename in filenames:
@@ -43,8 +50,8 @@ class Docx:
                     zipObj.write(filepath,filepath_zip)
 
     def get_document_info(self):
+        
         tree = ET.parse("tmp/docProps/core.xml")
         root = tree.getroot()
         dcterms_created = root.findall(f'.//dcterms:created',NS)[0]
         self.created_datetime = datetime.strptime(dcterms_created.text,"%Y-%m-%dT%H:%M:%SZ")
-        
