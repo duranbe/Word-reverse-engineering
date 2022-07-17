@@ -1,0 +1,4 @@
+/tmp/*
+src/word_extractor/tmp/*
+src/word_extractor/__pycache__/*
+src/word_extractor/*.docx
