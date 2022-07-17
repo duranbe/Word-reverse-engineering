@@ -7,6 +7,7 @@ from datetime import datetime
 WORD_NAMESPACE = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
 DCTERMS = "http://purl.org/dc/terms/"
 CP = "http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
+DC = "http://purl.org/dc/elements/1.1/"
 PARA = WORD_NAMESPACE + 'p'
 TEXT = WORD_NAMESPACE + 't'
 TABLE = WORD_NAMESPACE + 'tbl'
@@ -19,7 +20,8 @@ BODY = WORD_NAMESPACE + 'body'
 NS = {
     "w": WORD_NAMESPACE,
     "dcterms": DCTERMS,
-    "cp": CP
+    "cp": CP,
+    "dc": DC
 }
 
 class Docx:
@@ -33,6 +35,9 @@ class Docx:
         """        
 
         self.filename = filename
+        self.creator = None
+        self.last_modified_by = None
+        self.modified_datetime = None
         self.created_datetime = None
     
     def unzip(self):
@@ -53,5 +58,8 @@ class Docx:
         
         tree = ET.parse("tmp/docProps/core.xml")
         root = tree.getroot()
-        dcterms_created = root.find(f'.//dcterms:created',NS)
+
+        creator = root.find('.//dc:creator',NS)
+        self.creator = creator.text
+        dcterms_created = root.find('.//dcterms:created',NS)
         self.created_datetime = datetime.strptime(dcterms_created.text,"%Y-%m-%dT%H:%M:%SZ")
