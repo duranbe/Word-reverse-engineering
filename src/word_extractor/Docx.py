@@ -53,5 +53,5 @@ class Docx:
         
         tree = ET.parse("tmp/docProps/core.xml")
         root = tree.getroot()
-        dcterms_created = root.findall(f'.//dcterms:created',NS)[0]
+        dcterms_created = root.find(f'.//dcterms:created',NS)
         self.created_datetime = datetime.strptime(dcterms_created.text,"%Y-%m-%dT%H:%M:%SZ")
