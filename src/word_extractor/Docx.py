@@ -22,11 +22,19 @@ class Docx:
         self.created_datetime = None
     
     def unzip(self):
+        """"
+        Unzip a docx file and extract the xml files into a tmpfolder
+
+        """
     
         with zipfile.ZipFile(self.filename, 'r') as zip_ref:
             zip_ref.extractall("tmp")
 
     def zip(self):
+        """
+        Rezip a folder of xml files into a Word file
+        
+        """
 
         with zipfile.ZipFile(self.filename, 'w') as zipObj:
             for foldername, subfolders, filenames in os.walk("tmp"):
