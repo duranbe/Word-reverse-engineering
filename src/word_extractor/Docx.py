@@ -20,6 +20,7 @@ class Docx:
         self.last_modified_by = None
         self.modified_datetime = None
         self.created_datetime = None
+        self.title = None
     
     def unzip(self):
         """"
@@ -52,3 +53,8 @@ class Docx:
         self.creator = creator.text
         dcterms_created = root.find('.//dcterms:created',NS)
         self.created_datetime = datetime.strptime(dcterms_created.text,"%Y-%m-%dT%H:%M:%SZ")
+        title = root.find('.//dc:title',NS)
+        self.title = title.text
+        last_modified_by = root.find('.//cp:lastModifiedBy',NS)
+        self.last_modified_by = last_modified_by 
+
