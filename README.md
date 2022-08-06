@@ -1,5 +1,5 @@
 # Word reverse engineering 📝
-Notes on reverse engineering of a Microsoft Word file
+Notes and code on reverse engineering of a Microsoft Word file
 
 A Word file is in fact a compressed folder containing xml files to describe the contents, headers, footers, their relationships and images as well.
 
