@@ -37,12 +37,12 @@ class Docx:
         
         """
 
-        with zipfile.ZipFile(self.filename, 'w') as zipObj:
+        with zipfile.ZipFile(self.filename, 'w') as zip_object:
             for foldername, subfolders, filenames in os.walk("tmp"):
                 for filename in filenames:
                     filepath = os.path.join(foldername, filename)
-                    filepath_zip = filePath.replace('tmp\\','')
-                    zipObj.write(filepath,filepath_zip)
+                    filepath_zip = filepath.replace('tmp\\','')
+                    zip_object.write(filepath,filepath_zip)
 
     def get_document_info(self):
         
