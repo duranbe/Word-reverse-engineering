@@ -31,17 +31,17 @@ class Docx:
         with zipfile.ZipFile(self.filename, 'r') as zip_ref:
             zip_ref.extractall("tmp")
 
-    def zip(self):
+    def zip(self,filename,directory="tmp"):
         """
         Rezip a folder of xml files into a Word file
         
         """
 
         with zipfile.ZipFile(self.filename, 'w') as zip_object:
-            for foldername, subfolders, filenames in os.walk("tmp"):
+            for foldername, subfolders, filenames in os.walk(directory):
                 for filename in filenames:
                     filepath = os.path.join(foldername, filename)
-                    filepath_zip = filepath.replace('tmp\\','')
+                    filepath_zip = filepath.replace(directory+"\\",'')
                     zip_object.write(filepath,filepath_zip)
 
     def get_document_info(self):
