@@ -31,13 +31,19 @@ class Docx:
         with zipfile.ZipFile(self.filename, 'r') as zip_ref:
             zip_ref.extractall("tmp")
 
-    def zip(self,filename,directory="tmp"):
+    def zip(self,output_filename="output.docx",directory="tmp"):
         """
         Rezip a folder of xml files into a Word file
+
+        Args:
+            output_filename (string): Filename of the output
+
+            directory (string): Directory where the docx file has been extracted
         
         """
+        
 
-        with zipfile.ZipFile(self.filename, 'w') as zip_object:
+        with zipfile.ZipFile(output_filename, 'w') as zip_object:
             for foldername, subfolders, filenames in os.walk(directory):
                 for filename in filenames:
                     filepath = os.path.join(foldername, filename)
@@ -45,16 +51,19 @@ class Docx:
                     zip_object.write(filepath,filepath_zip)
 
     def get_document_info(self):
+        """
+
+        Get document information such as creator, creation date and time, title etc
+        
+        """
         
         tree = ET.parse("tmp/docProps/core.xml")
         root = tree.getroot()
 
-        creator = root.find('.//dc:creator',NS)
-        self.creator = creator.text
+        self.creator = root.find('.//dc:creator',NS).text
         dcterms_created = root.find('.//dcterms:created',NS)
         self.created_datetime = datetime.strptime(dcterms_created.text,"%Y-%m-%dT%H:%M:%SZ")
-        title = root.find('.//dc:title',NS)
-        self.title = title.text
-        last_modified_by = root.find('.//cp:lastModifiedBy',NS)
-        self.last_modified_by = last_modified_by 
+        self.title = root.find('.//dc:title',NS).text
+        self.last_modified_by = root.find('.//cp:lastModifiedBy',NS).text
+        
 
